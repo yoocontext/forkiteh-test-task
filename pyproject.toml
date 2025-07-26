@@ -9,5 +9,12 @@ dependencies = [
     "alembic>=1.16.4",
     "asyncpg>=0.30.0",
     "fastapi>=0.116.1",
+    "ruff>=0.12.5",
     "sqlalchemy>=2.0.41",
+    "tronpy>=0.6.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
 ]
