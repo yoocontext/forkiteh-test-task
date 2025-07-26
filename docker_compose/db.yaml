@@ -1,0 +1,39 @@
+services:
+  forkiteh_pg:
+    image: postgres:16-alpine
+    container_name: forkiteh_pg
+    env_file:
+      - ../.dev.env
+    environment:
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    ports:
+      - "45432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    ports:
+      - "8080:80"
+    depends_on:
+      - forkiteh_pg
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    networks:
+      - backend
+
+volumes:
+  pgdata:
+  pgadmin:
+
+networks:
+  backend:
+    driver: bridge
