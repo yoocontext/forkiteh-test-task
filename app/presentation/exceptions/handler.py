@@ -26,5 +26,3 @@ def register_exception_handlers(app: FastAPI):
         if exceptions_map.get(type(exc), None):
             status: int = exceptions_map.get(type(exc))
             raise HTTPException(status_code=status, detail=exc.message)
-        else:
-            raise HTTPException(status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Unknown error")
