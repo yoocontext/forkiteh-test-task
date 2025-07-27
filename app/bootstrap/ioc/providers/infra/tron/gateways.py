@@ -36,13 +36,13 @@ class GetTronGatewaysProvider(Provider):
         return gateway
 
     @provide
-    def energy(self, tron: AsyncTron) -> GetAccountTronGateway:
+    def account(self, tron: AsyncTron) -> GetAccountTronGateway:
         gateway = GetAccountTronGateway(tron=tron)
 
         return gateway
 
     @provide
-    def energy(self, tron: AsyncTron) -> GetAccountResourceTronGateway:
+    def account_resource(self, tron: AsyncTron) -> GetAccountResourceTronGateway:
         gateway = GetAccountResourceTronGateway(tron=tron)
 
         return gateway

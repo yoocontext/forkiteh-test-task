@@ -3,8 +3,8 @@ from dataclasses import dataclass
 from tronpy import AsyncTron
 
 from infra.tron.gateways.base import BaseGateway
-from infra.tron.gateways.get_account.mappers import account_response_retort
-from infra.tron.gateways.get_account.schemas import GetAccountResponseSchema
+from infra.tron.gateways.get.account.mappers import account_response_retort
+from infra.tron.gateways.get.account.schemas import GetAccountResponseSchema
 from share.custom_types import WalletAddress
 
 
