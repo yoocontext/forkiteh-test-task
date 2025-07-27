@@ -15,6 +15,7 @@ dependencies = [
     "ruff>=0.12.5",
     "sqlalchemy>=2.0.41",
     "tronpy>=0.6.1",
+    "uvicorn>=0.35.0",
 ]
 
 [dependency-groups]

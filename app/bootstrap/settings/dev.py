@@ -5,7 +5,7 @@ from dotenv import dotenv_values
 
 from bootstrap.settings.base import (
     CommonSettings,
-    PgSettings,
+    PgSettings, TronSettings,
 )
 
 
@@ -15,6 +15,7 @@ class DevSettings(CommonSettings):
         env_data = dotenv_values(env_file)
 
         data["pg"] = PgSettings.model_validate(env_data)
+        data["tron"] = TronSettings.model_validate(env_data)
 
         super().__init__(**data)
 

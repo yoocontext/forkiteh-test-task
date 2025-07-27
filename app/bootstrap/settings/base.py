@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class CommonSettings(BaseSettings):
     pg: "PgSettings"
+    tron: "TronSettings"
 
 
 class PgSettings(BaseSettings):
@@ -20,3 +21,9 @@ class PgSettings(BaseSettings):
         return rf"postgresql+asyncpg://{self.user}:{self.password}@{self.host}:{self.port}/{self.db}"
 
 
+class TronSettings(BaseSettings):
+    model_config = SettingsConfigDict(extra="allow")
+
+    network: str = Field(alias="TRON_NETWORK", default="NETWORK")
+    api_key: str = Field(alias="TRON_API_KEY", default="API_KEY")
+    endpoint_url: str = Field(alias="TRON_ENDPOINT_URL", default="ENDPOINT_URL")
