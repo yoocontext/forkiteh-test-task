@@ -4,7 +4,7 @@ from tronpy import AsyncTron
 
 from infra.tron.gateways.base import BaseGateway
 from infra.tron.gateways.get_account.mappers import account_response_retort
-from infra.tron.gateways.get_account.schemas import AccountResponseSchema
+from infra.tron.gateways.get_account.schemas import GetAccountResponseSchema
 from share.custom_types import WalletAddress
 
 
@@ -12,10 +12,10 @@ from share.custom_types import WalletAddress
 class GetAccountTronGateway(BaseGateway):
     tron: AsyncTron
 
-    async def act(self, address: WalletAddress) -> AccountResponseSchema:
+    async def act(self, address: WalletAddress) -> GetAccountResponseSchema:
         account: dict = await self.tron.get_account(address)
-        account_schema: AccountResponseSchema = (
-            account_response_retort.load(account, AccountResponseSchema)
+        account_schema: GetAccountResponseSchema = (
+            account_response_retort.load(account, GetAccountResponseSchema)
         )
 
         return account_schema

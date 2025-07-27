@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class AccountResponseSchema:
+class GetAccountResponseSchema:
     account_name: str
     type: str
     address: str
