@@ -9,7 +9,7 @@ services:
       - ../.dev.env
     ports:
       - "8000:8000"
-    command: "uvicorn bootstrap.main:create_app --host 0.0.0.0 --factory"
+    command: "uv run uvicorn bootstrap.main:create_app --host 0.0.0.0 --factory"
     networks:
       - backend
 
