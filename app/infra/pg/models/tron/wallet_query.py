@@ -22,7 +22,7 @@ class WalletQueryOrm(
     address: Mapped[str] = mapped_column(String(64), index=True)
     bandwidth: Mapped[int] = mapped_column(BigInteger)
     energy: Mapped[int] = mapped_column(BigInteger)
-    balance_trx: Mapped[Decimal] = mapped_column(Numeric(10, 2))
+    balance_trx: Mapped[Decimal] = mapped_column(Numeric(20, 8))
 
     def __repr__(self):
         return f"<WalletQuery(address={self.address}, balance_trx={self.balance_trx})>"
