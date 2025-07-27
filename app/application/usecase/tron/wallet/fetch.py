@@ -10,6 +10,11 @@ from application.usecase.base import (
     BaseUseCase,
 )
 from infra.pg.models.tron.wallet_query import WalletQueryOrm
+from infra.tron.gateways.get import (
+    GetBalanceTrxTronGateway,
+    GetBandwidthTronGateway,
+    GetEnergyTronGateway,
+)
 from share.custom_types import WalletAddress
 
 
@@ -28,6 +33,9 @@ class FetchWalletTronResult(BaseResult):
 
 @dataclass
 class FetchWalletTronUseCase(BaseUseCase):
+    get_balance_trx_gateway: GetBalanceTrxTronGateway
+    get_bandwidth_gateway: GetBandwidthTronGateway
+    get_energy_tron_gateway: GetEnergyTronGateway
     session: AsyncSession
     tron: AsyncTron
 
@@ -36,9 +44,9 @@ class FetchWalletTronUseCase(BaseUseCase):
         command: FetchWalletTronCommand,
     ) -> FetchWalletTronResult:
 
-        bandwidth: int = await self.tron.get_bandwidth(addr=command.address)
-        energy: int = await self.tron.get_energy(address=command.address)
-        balance_trx: Decimal = await self.tron.get_account_balance(addr=command.address)
+        bandwidth: int = await self.get_bandwidth_gateway.act(addr=command.address)
+        energy: int = await self.get_energy_tron_gateway.act(address=command.address)
+        balance_trx: Decimal = await self.get_balance_trx_gateway.act(addr=command.address)
 
         wallet_query_orm = WalletQueryOrm(
             address=command.address,
