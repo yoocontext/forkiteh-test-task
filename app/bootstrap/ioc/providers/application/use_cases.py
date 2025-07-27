@@ -15,7 +15,7 @@ from infra.tron.gateways.get import (
 
 
 class UseCaseProvider(Provider):
-    scope = Scope.APP
+    scope = Scope.REQUEST
 
     @provide
     def tron_wallet_fetch(
