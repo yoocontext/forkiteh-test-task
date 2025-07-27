@@ -44,9 +44,9 @@ class FetchWalletTronUseCase(BaseUseCase):
         command: FetchWalletTronCommand,
     ) -> FetchWalletTronResult:
 
-        bandwidth: int = await self.get_bandwidth_gateway.act(addr=command.address)
+        bandwidth: int = await self.get_bandwidth_gateway.act(address=command.address)
         energy: int = await self.get_energy_tron_gateway.act(address=command.address)
-        balance_trx: Decimal = await self.get_balance_trx_gateway.act(addr=command.address)
+        balance_trx: Decimal = await self.get_balance_trx_gateway.act(address=command.address)
 
         wallet_query_orm = WalletQueryOrm(
             address=command.address,
