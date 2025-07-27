@@ -1,5 +1,7 @@
+import asyncio
 from dataclasses import dataclass
 from decimal import Decimal
+from typing import Coroutine, Any
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from tronpy import AsyncTron
@@ -44,9 +46,15 @@ class FetchWalletTronUseCase(BaseUseCase):
         command: FetchWalletTronCommand,
     ) -> FetchWalletTronResult:
 
-        bandwidth: int = await self.get_bandwidth_gateway.act(address=command.address)
-        energy: int = await self.get_energy_tron_gateway.act(address=command.address)
-        balance_trx: Decimal = await self.get_balance_trx_gateway.act(address=command.address)
+        bandwidth_coro: Coroutine[WalletAddress, Any, int] = self.get_bandwidth_gateway.act(address=command.address)
+        energy_coro: Coroutine[WalletAddress, Any, int] = self.get_energy_tron_gateway.act(address=command.address)
+        balance_trx_coro: Coroutine[WalletAddress, Any, Decimal] = self.get_balance_trx_gateway.act(address=command.address)
+
+        bandwidth, energy, balance_trx = await asyncio.gather(
+            bandwidth_coro,
+            energy_coro,
+            balance_trx_coro,
+        )
 
         wallet_query_orm = WalletQueryOrm(
             address=command.address,
