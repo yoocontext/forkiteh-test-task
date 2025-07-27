@@ -6,6 +6,7 @@ from dishka import (
 )
 from dishka.integrations.fastapi import FastapiProvider
 
+from bootstrap.ioc.providers.application import UseCaseProvider
 from bootstrap.ioc.providers.infra import (
     AlchemyProvider,
     ClientTronProvider,
@@ -16,6 +17,7 @@ from bootstrap.ioc.providers.infra import (
 @lru_cache(1)
 async def get_container() -> AsyncContainer:
     container: AsyncContainer = make_async_container(
+        UseCaseProvider(),
         AlchemyProvider(),
         ClientTronProvider(),
         GetTronGatewaysProvider(),
