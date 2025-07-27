@@ -9,7 +9,7 @@ from share.custom_types import WalletAddress
 
 
 @dataclass
-class GetAccountResourceGateway(BaseGateway):
+class GetAccountResourceTronGateway(BaseGateway):
     tron: AsyncTron
 
     async def act(self, address: WalletAddress) -> GetAccountResourceResponseSchema:
@@ -27,7 +27,7 @@ import asyncio
 async def main():
     tron = AsyncTron()
 
-    g = GetAccountResourceGateway(tron=tron)
+    g = GetAccountResourceTronGateway(tron=tron)
     addr: WalletAddress = "TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj"
 
     r = await g.act(address=addr)

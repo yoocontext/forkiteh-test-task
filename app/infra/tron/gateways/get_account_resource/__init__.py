@@ -2,11 +2,11 @@ from .schemas import (
     GetAccountResourceResponseSchema,
 )
 from .gateway import (
-    GetAccountResourceGateway,
+    GetAccountResourceTronGateway,
 )
 
 
 __all__ = (
     "GetAccountResourceResponseSchema",
-    "GetAccountResourceGateway",
+    "GetAccountResourceTronGateway",
 )
