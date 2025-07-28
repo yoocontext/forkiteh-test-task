@@ -17,5 +17,6 @@ class BaseResult(ABC):
 
 @dataclass
 class BaseUseCase(ABC):
+    @abstractmethod
     async def act(self, command: BaseCommand) -> BaseResult:
         ...
