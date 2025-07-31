@@ -4,7 +4,6 @@ from decimal import Decimal
 from typing import Coroutine, Any
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from tronpy import AsyncTron
 
 from application.usecase.base import (
     BaseResult,
@@ -12,6 +11,7 @@ from application.usecase.base import (
     BaseUseCase,
 )
 from infra.pg.models.tron.wallet_query import WalletQueryOrm
+from infra.tron.base import IAsyncTron
 from infra.tron.gateways.get import (
     GetBalanceTrxTronGateway,
     GetBandwidthTronGateway,
@@ -39,7 +39,7 @@ class FetchWalletTronUseCase(BaseUseCase):
     get_bandwidth_gateway: GetBandwidthTronGateway
     get_energy_tron_gateway: GetEnergyTronGateway
     session: AsyncSession
-    tron: AsyncTron
+    tron: IAsyncTron
 
     async def act(
         self,

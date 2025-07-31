@@ -30,3 +30,17 @@ def get_container() -> AsyncContainer:
     )
 
     return container
+
+
+@lru_cache(1)
+def get_test_container() -> AsyncContainer:
+    container: AsyncContainer = make_async_container(
+        UseCaseProvider(),
+        AlchemyProvider(),
+        ClientTronProvider(),
+        GetTronGatewaysProvider(),
+        SettingsProvider(),
+        FastapiProvider(),
+    )
+
+    return container

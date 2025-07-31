@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from decimal import Decimal
 
-from tronpy import AsyncTron
-
+from infra.tron.base import IAsyncTron
 from infra.tron.gateways.base import BaseGateway
 from infra.tron.handlers import handle_tronpy_errors
 from share.custom_types import WalletAddress
@@ -10,7 +9,7 @@ from share.custom_types import WalletAddress
 
 @dataclass
 class GetBalanceTrxTronGateway(BaseGateway):
-    tron: AsyncTron
+    tron: IAsyncTron
 
     @handle_tronpy_errors
     async def act(self, address: WalletAddress) -> Decimal:
