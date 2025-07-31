@@ -20,6 +20,12 @@ def create_app() -> FastAPI:
     app.include_router(v1_router)
     register_exception_handlers(app=app)
 
+    return app
+
+
+def main() -> FastAPI:
+    app: FastAPI = create_app()
+
     container: AsyncContainer = get_container()
     setup_dishka(container=container, app=app)
 
