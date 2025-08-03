@@ -1,4 +1,5 @@
 import asyncio
+import sys
 from logging.config import fileConfig
 
 from sqlalchemy import pool
@@ -25,8 +26,9 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 target_metadata = BaseOrm.metadata
 
-# settings = get_settings()
-# config.set_main_option("sqlalchemy.url", settings.pg.postgres_url)
+if "pytest" not in sys.modules:  # не тесты
+    settings = get_settings()
+    config.set_main_option("sqlalchemy.url", settings.pg.postgres_url)
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
