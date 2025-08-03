@@ -1,13 +1,15 @@
 from .tron import (
     ClientTronProvider,
-    MockClientTronProvider,
     GetTronGatewaysProvider,
 )
-from .pg import AlchemyProvider
+from .pg import (
+    AlchemyProvider,
+    DataMapperProvider,
+)
 
 __all__ = (
     "ClientTronProvider",
-    "MockClientTronProvider",
     "GetTronGatewaysProvider",
     "AlchemyProvider",
+    "DataMapperProvider",
 )

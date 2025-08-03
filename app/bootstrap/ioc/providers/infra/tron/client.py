@@ -1,5 +1,3 @@
-from decimal import Decimal
-
 from dishka import (
     Provider,
     Scope,
@@ -10,7 +8,6 @@ from tronpy.providers import AsyncHTTPProvider
 
 from bootstrap.settings.base import CommonSettings
 from infra.tron.base import IAsyncTron
-from tests.mocs.tron import MockAsyncTron
 
 
 class ClientTronProvider(Provider):
@@ -28,13 +25,3 @@ class ClientTronProvider(Provider):
         return tron
 
 
-class MockClientTronProvider(Provider):
-    @provide(scope=Scope.APP)
-    def torn(self) -> IAsyncTron:
-        tron = MockAsyncTron(
-            balances=[Decimal(4373478)],
-            bandwidths=[0, 12, 334],
-            energies=[11, 222, 0]
-        )
-
-        return tron

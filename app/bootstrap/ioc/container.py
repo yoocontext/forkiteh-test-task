@@ -14,8 +14,8 @@ from bootstrap.ioc.providers.application import (
 from bootstrap.ioc.providers.infra import (
     AlchemyProvider,
     ClientTronProvider,
-    MockClientTronProvider,
     GetTronGatewaysProvider,
+    DataMapperProvider,
 )
 from bootstrap.ioc.providers.bootstrap import SettingsProvider
 
@@ -26,6 +26,7 @@ DEV_PROVIDERS: list[Provider] = [
     AlchemyProvider(),
     ClientTronProvider(),
     GetTronGatewaysProvider(),
+    DataMapperProvider(),
     SettingsProvider(),
     FastapiProvider(),
 ]
@@ -37,12 +38,3 @@ def get_container() -> AsyncContainer:
 
     return container
 
-
-@lru_cache(1)
-def get_test_container() -> AsyncContainer:
-    container: AsyncContainer = make_async_container(
-        MockClientTronProvider(),
-        *DEV_PROVIDERS,
-    )
-
-    return container

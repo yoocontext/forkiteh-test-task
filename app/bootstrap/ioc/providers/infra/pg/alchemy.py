@@ -16,10 +16,25 @@ from bootstrap.settings.base import CommonSettings
 
 
 class AlchemyProvider(Provider):
+    def __init__(
+        self,
+        connection_string: str | None = None,
+    ) -> None:
+        super().__init__()
+        self.connection_string: str | None = connection_string
+
     @provide(scope=Scope.APP)
-    async def create_engine(self, settings: CommonSettings) -> AsyncEngine:
+    async def create_engine(
+        self,
+        settings: CommonSettings,
+    ) -> AsyncEngine:
+        if not self.connection_string:
+            url: str = settings.pg.postgres_url
+        else:
+            url: str = self.connection_string
+
         engine: AsyncEngine = create_async_engine(
-            url=settings.pg.postgres_url,
+            url=url,
             echo=False,
         )
         return engine
