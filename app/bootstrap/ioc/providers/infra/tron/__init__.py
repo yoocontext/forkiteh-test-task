@@ -1,4 +1,6 @@
-from .client import ClientTronProvider
+from .client import (
+    ClientTronProvider,
+)
 from .gateways import GetTronGatewaysProvider
 
 

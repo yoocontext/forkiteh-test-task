@@ -5,7 +5,7 @@ from presentation.api.v1.tron.handlers import router as tron_router
 
 
 router = APIRouter(
-    prefix="",
+    prefix="/v1",
     route_class=DishkaRoute,
 )
 
